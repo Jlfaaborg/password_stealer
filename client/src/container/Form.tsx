@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import form from "../presentational/form"
+import form from "../presentational/form";
 
 
 
