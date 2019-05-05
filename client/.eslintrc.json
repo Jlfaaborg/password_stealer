@@ -1,19 +1,14 @@
 {
     "env": {
-        "browser": true,
+        "node": true,
         "es6": true
     },
     "extends": [
-        "typescript",
-        "typescript",
-        "typescript/react",
-        "typescript/prettier",
-        "typescript/prettier-react"
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "react-app",
+        "plugin:prettier/recommended"
     ],
-    "globals": {
-        "Atomics": "readonly",
-        "SharedArrayBuffer": "readonly"
-    },
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -21,20 +16,9 @@
         "ecmaVersion": 2018,
         "sourceType": "module"
     },
-    "plugins": [
-        "react",
-        "filenames",
-        "jest"
-    ],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "filenames", "jest"],
     "rules": {
-        "filenames/no-index": "error",
-        "filenames/match-exported": [
-            "error",
-            "kebab"
-        ],
-        "jest/no-disabled-tests": "error",
-        "jest/no-focused-tests": "error",
-        "jest/no-identical-title": "error",
-        "jest/valid-expect": "error"
+        "no-console": "error"
     }
 }

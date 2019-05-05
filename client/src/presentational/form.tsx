@@ -1,6 +1,6 @@
 import React from "react";
 import store from "../redux/store";
-import { ADD_USER, DELETE_USER, fetchUsers } from "../redux/actions";
+import { ADD_USER, postUsers, fetchUsers } from "../redux/actions";
 
 const fetchUser = (user: { userName?: any, password?: any }) => {
     store.dispatch(fetchUsers());
@@ -13,13 +13,7 @@ const addUser = (user: { userName?: any, password?: any }) => {
     })
 }
 
-const deleteUser = (user: { userName?: any, password?: any }) => {
-    store.dispatch({
-        type: DELETE_USER,
-        user: user
-    })
-}
-
+const post = (): any => store.dispatch(postUsers(store.getState()));
 
 class Form extends React.Component<{}, { userName?: any, password?: any }> {
     constructor(props: any) {
@@ -42,11 +36,11 @@ class Form extends React.Component<{}, { userName?: any, password?: any }> {
             case "add":
                 addUser(user);
                 break;
-            case "delete":
-                deleteUser(user)
-                break;
             case "fetch":
                 fetchUser(user);
+                break;
+            case "post":
+                post();
                 break;
             default:
                 return
@@ -67,8 +61,9 @@ class Form extends React.Component<{}, { userName?: any, password?: any }> {
                 <input type="text" name="password" onChange={this.handleChange} />
                 <br />
                 <button type="submit" value="add" onClick={this.handleClick} >Add</button>
-                <button type="submit" value="delete" onClick={this.handleClick} >Delete By Username</button>
                 <button type="submit" value="fetch" onClick={this.handleClick} >Fetch Users</button>
+                <button type="submit" value="post" onClick={this.handleClick} >Post All</button>
+
             </form>
         )
     }

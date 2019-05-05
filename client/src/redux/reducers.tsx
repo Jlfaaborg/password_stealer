@@ -27,7 +27,7 @@ function users(state = initialState, action: any) {
             return state;
         case RECEIEVE_USERS:
         console.log(action)
-            return [...state, action.data];
+            return [...state, ...action.data];
         default:
             return state;
     }
