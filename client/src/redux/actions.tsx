@@ -49,27 +49,27 @@ function receieveUsers(users: User[], json: any) {
 }
 
 export function fetchUsers(users = []) {
-  return function(dispatch: any) {
+  return function (dispatch: any) {
     dispatch(requestUsers(users));
-    return fetch("http://localhost:9000/api")
+    return fetch("http://localhost:9000/api", { headers: { 'Content-Type': 'application/json' } })
       .then(
         (response: any) => response.json(),
         (error: any) => console.log("An error occurred.", error)
       )
       .then((json: any) =>
-        // We can dispatch many times!
-        // Here, we update the app state with the results of the API call.
+        // Update the app state with the results of the API call.
         dispatch(receieveUsers(users, json))
       );
   };
 }
 
 export function postUsers(users: User[]) {
-  return function(dispatch: any) {
+  return function (dispatch: any) {
     console.log(users)
     return fetch("http://localhost:9000/api", {
+      headers: { 'Content-Type': 'application/json' },
       method: "POST",
-      body: "hello"
+      body: JSON.stringify(users)
     }).then(response => {
       console.log(response);
     });

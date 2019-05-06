@@ -2,6 +2,7 @@ import React from "react";
 import store from "../redux/store"
 import { UPDATE_USER, DELETE_USER } from "../redux/actions";
 
+// for updating users password based on userName
 const getNewUser = (name: string) => {
     const query = document.getElementsByClassName(name);
     const item = query[0];
@@ -21,7 +22,7 @@ const getNewUser = (name: string) => {
 }
 
 
-
+//is used to dynamically create a table depending on how many users are in the store's state. 
 const tableMaker = (users: { userName: string, password: string }[]) => {
     let i = 0;
     return users.map(user => {
@@ -44,6 +45,7 @@ const tableMaker = (users: { userName: string, password: string }[]) => {
     })
 }
 
+//Three collums table 
 const Table: React.FC = (props: any) => {
     console.log(props);
     return (

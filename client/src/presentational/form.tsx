@@ -2,10 +2,12 @@ import React from "react";
 import store from "../redux/store";
 import { ADD_USER, postUsers, fetchUsers } from "../redux/actions";
 
-const fetchUser = (user: { userName?: any, password?: any }) => {
+//fetches all users from adds to state
+const fetchUser = () => {
     store.dispatch(fetchUsers());
 };
 
+//adds user to state ready to be posted
 const addUser = (user: { userName?: any, password?: any }) => {
     store.dispatch({
         type: ADD_USER,
@@ -13,6 +15,7 @@ const addUser = (user: { userName?: any, password?: any }) => {
     })
 }
 
+//posts the added users
 const post = (): any => store.dispatch(postUsers(store.getState()));
 
 class Form extends React.Component<{}, { userName?: any, password?: any }> {
@@ -20,12 +23,14 @@ class Form extends React.Component<{}, { userName?: any, password?: any }> {
         super(props)
         this.handleChange = this.handleChange.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        //to get what is typed into the inputs
         this.state = {
             userName: props.userName,
             password: props.password
         };
     }
 
+    //handles all buttons on form
     handleClick = (event: any) => {
         event.preventDefault()
         const user = {
@@ -37,7 +42,7 @@ class Form extends React.Component<{}, { userName?: any, password?: any }> {
                 addUser(user);
                 break;
             case "fetch":
-                fetchUser(user);
+                fetchUser();
                 break;
             case "post":
                 post();
@@ -47,6 +52,7 @@ class Form extends React.Component<{}, { userName?: any, password?: any }> {
         }
     };
 
+    //realtime tracking of input values
     handleChange = (event: { target: { name: any; value: any; }; }) => {
         this.setState({ [event.target.name]: event.target.value });
     }

@@ -1,6 +1,6 @@
 var mysql = require("mysql");
 
-//local mysql db connection
+// mysql db connection
 var db = {
   host: "us-cdbr-iron-east-01.cleardb.net",
   user: "b4a2d595e8780a",

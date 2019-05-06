@@ -1,8 +1,6 @@
 import { connect } from "react-redux";
 import form from "../presentational/form";
 
-
-
 const mapStateToProps = (state: any) => {
     return {
         users: state
