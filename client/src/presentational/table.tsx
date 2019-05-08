@@ -10,7 +10,7 @@ const getNewUser = (name: string) => {
     let passwordEl = item.querySelectorAll("input")[1];
 
     for (const el of query) {
-        el.className = userNameEl.value
+        el.className = userNameEl.value+passwordEl.value;
     }
 
     const user = {
@@ -30,15 +30,15 @@ const tableMaker = (users: { userName: string, password: string }[]) => {
             return ""
         }
         let update = `update${i}`;
-        let commit = `commit${i}`;
+        let remove = `delete${i}`;
         i++;
         return (
-            <tr key={i} className={user.userName} >
-                <th><input type="text" name="userName" defaultValue={user.userName}></input></th>
-                <th><input type="text" name="password" defaultValue={user.password}></input></th>
+            <tr key={i} className={user.userName + user.password} >
+                <th><input type="text" name="userName" placeholder={user.userName}></input></th>
+                <th><input type="text" name="password" placeholder={user.password}></input></th>
                 <th>
-                    <button id={update} onClick={() => store.dispatch({ type: UPDATE_USER, user: getNewUser(user.userName), oldUserName: user.userName })}>Update</button>
-                    <button id={commit} onClick={() => store.dispatch({ type: DELETE_USER, user: user })}>Delete</button>
+                    <button id={update} onClick={() => store.dispatch({ type: UPDATE_USER, user: getNewUser(user.userName+user.password), oldUserName: user.userName })}>Update</button>
+                    <button id={remove} onClick={() => store.dispatch({ type: DELETE_USER, user: {user} })}>Delete</button>
                 </th>
             </tr>
         )
@@ -47,18 +47,20 @@ const tableMaker = (users: { userName: string, password: string }[]) => {
 
 //Three collums table 
 const Table: React.FC = (props: any) => {
-    console.log(props);
     return (
-        <table>
-            <thead>
-                <tr>
-                    <th>User Name</th>
-                    <th>Password</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>{tableMaker(props.users)}</tbody>
-        </table>
+        <div>
+            <h3>Current Store</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>{tableMaker(props.users)}</tbody>
+            </table>
+        </div>
     )
 }
 

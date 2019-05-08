@@ -1,6 +1,6 @@
 import React from "react";
 import store from "../redux/store";
-import { ADD_USER, postUsers, fetchUsers } from "../redux/actions";
+import { ADD_USER, postUsers, fetchUsers, removeUsers } from "../redux/actions";
 
 //fetches all users from adds to state
 const fetchUser = () => {
@@ -15,8 +15,11 @@ const addUser = (user: { userName?: any, password?: any }) => {
     })
 }
 
-//posts the added users
+//posts the added users to db
 const post = (): any => store.dispatch(postUsers(store.getState()));
+
+//removes all users on form from db
+const remove = (): any => store.dispatch(removeUsers(store.getState()));
 
 class Form extends React.Component<{}, { userName?: any, password?: any }> {
     constructor(props: any) {
@@ -47,6 +50,9 @@ class Form extends React.Component<{}, { userName?: any, password?: any }> {
             case "post":
                 post();
                 break;
+            case "remove":
+                remove();
+                break;
             default:
                 return
         }
@@ -59,18 +65,40 @@ class Form extends React.Component<{}, { userName?: any, password?: any }> {
 
     render() {
         return (
-            <form >
-                <label htmlFor="userName">User Name</label>
-                <input type="text" name="userName" onChange={this.handleChange} />
-                <br />
-                <label htmlFor="password">Password</label>
-                <input type="text" name="password" onChange={this.handleChange} />
-                <br />
-                <button type="submit" value="add" onClick={this.handleClick} >Add</button>
-                <button type="submit" value="fetch" onClick={this.handleClick} >Fetch Users</button>
-                <button type="submit" value="post" onClick={this.handleClick} >Post All</button>
+            <div>
+                <h1>Welcome To My App Here Is How To Use</h1>
+                <h2>It Is Connected To React & Redux Tools By Hitting F12 (or whatever you mac users use)</h2>
+                <h3>There Are Three Buttons Below:
+                <ol>
+                        <li>
+                            Add: Adds User To Store To Be Worked On From Table Below
+                    </li>
+                        <li>
+                            Fetch: Fetches Current Users In DB Will Add To Store And DB Below
+                    </li>
+                        <li>
+                            Post: Posts All Users In Store Updates Users In DB With Same UserName With Latest Password
+                    </li>
+                        <li>
+                            Remove: Removes All Users In Store From DB. <strong>MAKE SURE TO CHECK TABLE BELOW BEFORE YOU REMOVE</strong> (not like its important)
+                    </li>
+                    </ol>
+                </h3>
+                <form >
+                    <label htmlFor="userName">User Name</label>
+                    <input type="text" name="userName" onChange={this.handleChange} />
+                    <br />
+                    <label htmlFor="password">Password</label>
+                    <input type="text" name="password" onChange={this.handleChange} />
+                    <br />
+                    <button type="submit" value="add" onClick={this.handleClick} >Add</button>
+                    <button type="submit" value="fetch" onClick={this.handleClick} >Fetch Users</button>
+                    <button type="submit" value="post" onClick={this.handleClick} >Post All</button>
+                    <button type="submit" value="remove" onClick={this.handleClick} >Remove All</button>
 
-            </form>
+
+                </form>
+            </div>
         )
     }
 }

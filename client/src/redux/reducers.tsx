@@ -20,8 +20,9 @@ function users(state = initialState, action: any) {
             return [...state, action.user];
         case DELETE_USER:
             state = removeEmptyUsers(state);
+            console.log(action.user.user)
             const newState = state.filter(user => {
-                return user.userName !== action.user.userName
+                return (user !== action.user.user)
             });
             return newState;
         case UPDATE_USER:

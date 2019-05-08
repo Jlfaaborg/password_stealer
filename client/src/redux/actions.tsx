@@ -66,7 +66,19 @@ export function fetchUsers(users = []) {
 export function postUsers(users: User[]) {
   return function (dispatch: any) {
     console.log(users)
-    return fetch("http://localhost:9000/api", {
+    return fetch("http://localhost:9000/api?type=add", {
+      headers: { 'Content-Type': 'application/json' },
+      method: "POST",
+      body: JSON.stringify(users)
+    }).then(response => {
+      console.log(response);
+    });
+  };
+}
+
+export function removeUsers(users: User[]) {
+  return function (dispatch: any) {
+    return fetch("http://localhost:9000/api?type=delete", {
       headers: { 'Content-Type': 'application/json' },
       method: "POST",
       body: JSON.stringify(users)
