@@ -21,9 +21,10 @@ function handleDisconnect() {
   });
 
   connection.on("error", function(err) {
-    console.log("db error", err);
+    console.log("db error", err.code);
     // eslint-disable-next-line no-constant-condition
     if (err.code === "PROTOCOL_CONNECTION_LOST" || "ERR_CONNECTION_REFUSED") {
+      connection.destroy();
       handleDisconnect();
     } else {
       throw err;

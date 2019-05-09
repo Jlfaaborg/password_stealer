@@ -9,6 +9,7 @@ export const DELETE_USER = "DELETE_USER";
 export const UPDATE_USER = "UPDATE_PASSWORD";
 export const REQUEST_USERS = "REQUEST_USERS";
 export const RECEIEVE_USERS = "RECIEVE_USERS";
+export const RESET_USERS = "RESET_USERS";
 
 export function addUser(user: User) {
   return {
@@ -24,12 +25,18 @@ export function deleteUser(user: User) {
   };
 }
 
-export function updateUser(userName: any, oldUserName: any) {
+export function updateUser(newUser: any, oldUser: any) {
   return {
     type: UPDATE_USER,
-    userName,
-    oldUserName
+    newUser,
+    oldUser
   };
+}
+
+export function resetUsers() {
+  return {
+    type: RESET_USERS,
+  }
 }
 
 function requestUsers(users: User[]) {
@@ -72,6 +79,7 @@ export function postUsers(users: User[]) {
       body: JSON.stringify(users)
     }).then(response => {
       console.log(response);
+      dispatch(resetUsers());
     });
   };
 }
@@ -84,6 +92,8 @@ export function removeUsers(users: User[]) {
       body: JSON.stringify(users)
     }).then(response => {
       console.log(response);
+    }).then(() => {
+      dispatch(resetUsers());
     });
   };
 }

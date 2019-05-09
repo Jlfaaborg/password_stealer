@@ -4,19 +4,22 @@ import { UPDATE_USER, DELETE_USER } from "../redux/actions";
 
 // for updating users password based on userName
 const getNewUser = (name: string) => {
+    console.log(name)
     const query = document.getElementsByClassName(name);
     const item = query[0];
     let userNameEl = item.querySelectorAll("input")[0];
     let passwordEl = item.querySelectorAll("input")[1];
 
     for (const el of query) {
-        el.className = userNameEl.value+passwordEl.value;
+        el.className = userNameEl+passwordEl.value;
     }
 
     const user = {
         userName: userNameEl.value,
         password: passwordEl.value
     }
+
+    console.log(user)
 
     return user;
 }
@@ -34,10 +37,10 @@ const tableMaker = (users: { userName: string, password: string }[]) => {
         i++;
         return (
             <tr key={i} className={user.userName + user.password} >
-                <th><input type="text" name="userName" placeholder={user.userName}></input></th>
-                <th><input type="text" name="password" placeholder={user.password}></input></th>
+                <th><input type="text" name="userName" placeholder={user.userName} defaultValue={user.userName}></input></th>
+                <th><input type="text" name="password" placeholder={user.password} defaultValue={user.password}></input></th>
                 <th>
-                    <button id={update} onClick={() => store.dispatch({ type: UPDATE_USER, user: getNewUser(user.userName+user.password), oldUserName: user.userName })}>Update</button>
+                    <button id={update} onClick={() => store.dispatch({ type: UPDATE_USER, newUser: getNewUser(user.userName+user.password), oldUser: {user} })}>Update</button>
                     <button id={remove} onClick={() => store.dispatch({ type: DELETE_USER, user: {user} })}>Delete</button>
                 </th>
             </tr>

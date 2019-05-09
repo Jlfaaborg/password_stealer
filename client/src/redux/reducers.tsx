@@ -1,4 +1,4 @@
-import { DELETE_USER, ADD_USER, UPDATE_USER, REQUEST_USERS, RECEIEVE_USERS } from "./actions";
+import { DELETE_USER, ADD_USER, UPDATE_USER, REQUEST_USERS, RECEIEVE_USERS, RESET_USERS } from "./actions";
 
 const initialState = [{
     userName: "",
@@ -28,10 +28,10 @@ function users(state = initialState, action: any) {
         case UPDATE_USER:
             state = removeEmptyUsers(state);
             index = state.findIndex((user) => {
-                return user.userName === action.oldUserName
+                return user === action.oldUser.user 
             });
             if (index !== undefined) {
-                state[index] = action.user
+                state[index] = action.newUser
             };
             return [...state];
         case REQUEST_USERS:
@@ -39,6 +39,8 @@ function users(state = initialState, action: any) {
         case RECEIEVE_USERS:
             state = removeEmptyUsers(state);
             return [...state, ...action.data];
+        case RESET_USERS:
+            return initialState;
         default:
             return state;
     }
