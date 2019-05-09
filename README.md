@@ -1,7 +1,16 @@
 # password_stealer
 Steals Passwords
 
-It doesnt actually but it is (going to be) a Full Stack application using some technologies such as:
+It doesnt actually but it is a Full Stack application using some technologies such as:
 React, Express, Redux, Typescript, MYSQL.
 
-On startup the initial state will come from database. The "Users" (includes a userName and password) will be displayed in dynamic table. The client has the option to add remove or update a user based on certain parameters.
+To Run from root directory
+  npm install
+  npm run install
+  npm run start
+  
+  From there on just npm run start to start. Or update a file and save it as it has hotreloading.
+
+Pretty much all this does is asks for a username and password and stores it in a data base. You can add multiple Users to the redux store which changes how the table will render. You can also fetch Users from the db post Users to the db. All fetch requests will add to the state all post requests will post the state to the store. 
+
+ENJOY!
