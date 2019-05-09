@@ -7,7 +7,7 @@ React, Express, Redux, Typescript, MYSQL.
 MUST HAVE NODE: https://nodejs.org/en/download/
 
 To Run from root directory in terminal
-  npm install 
+  npm install
   npm run start
   
   From there on just "npm run start" to start. Or update a file and save while running to reload.
